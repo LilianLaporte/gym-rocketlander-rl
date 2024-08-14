@@ -50,10 +50,10 @@ CONTINUOUS = True
 VEL_STATE = True  # Add velocity info to state
 FPS = 60
 SCALE_S = 0.35  # Temporal Scaling, lower is faster - adjust forces appropriately
-INITIAL_RANDOM = 0.4  # Random scaling of initial velocity, higher is more difficult
+INITIAL_RANDOM = 0.2  # Random scaling of initial velocity, higher is more difficult
 
-START_HEIGHT = 800.0
-START_SPEED = 80.0
+START_HEIGHT = 300.0
+START_SPEED = 40.0
 
 # ROCKET
 MIN_THROTTLE = 0.4
@@ -252,7 +252,7 @@ class RocketLander(gym.Env):
 
         self.ship.color1 = (0.2, 0.2, 0.2)
 
-        initial_x = W / 2 + W * np.random.uniform(-0.3, 0.3)
+        initial_x = W / 2 + W * np.random.uniform(-0.1, 0.1)
         initial_y = H * 0.95
         self.lander = self.world.CreateDynamicBody(
             position=(initial_x, initial_y),
