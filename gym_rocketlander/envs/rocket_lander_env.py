@@ -337,7 +337,7 @@ class RocketLander(gym.Env):
             -START_SPEED,
         )
 
-        self.lander.angularVelocity = (1 + INITIAL_RANDOM) * np.random.uniform(-1, 1)
+        self.lander.angularVelocity = (0.01 + INITIAL_RANDOM) * np.random.uniform(-1, 1)
 
         self.drawlist = (
             self.legs + [self.water] + [self.ship] + self.containers + [self.lander]
