@@ -53,7 +53,7 @@ SCALE_S = 0.35  # Temporal Scaling, lower is faster - adjust forces appropriatel
 INITIAL_RANDOM = 0.05  # Random scaling of initial velocity, higher is more difficult
 
 START_HEIGHT = 300.0
-START_SPEED = 20.0
+START_SPEED = 10.0
 
 # ROCKET
 MIN_THROTTLE = 0.4
