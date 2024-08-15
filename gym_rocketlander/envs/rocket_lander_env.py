@@ -428,7 +428,7 @@ class RocketLander(gym.Env):
 
         # state variables for reward
         distance = np.linalg.norm(
-            (2 * x_distance, 2 * y_distance)
+            (3 * x_distance, 2 * y_distance)
         )  # weight x position more
         speed = np.linalg.norm(vel_l)
         groundcontact = self.legs[0].ground_contact or self.legs[1].ground_contact
