@@ -438,7 +438,7 @@ class RocketLander(gym.Env):
         outside = abs(pos.x - W / 2) > W / 2 or pos.y > H
         fuelcost = 0.1 * (0.5 * self.power + abs(self.force_dir)) / FPS
         landed = (
-            self.legs[0].ground_contact and self.legs[1].ground_contact and speed < 0.1
+            self.legs[0].ground_contact and self.legs[1].ground_contact and speed < 0.3
         )
         done = False
 
