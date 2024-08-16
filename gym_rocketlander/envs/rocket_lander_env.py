@@ -171,6 +171,7 @@ class RocketLander(gym.Env):
         self.throttle = 0
         self.gimbal = 0.0
         self.landed_ticks = 0
+        self.step_number = 0
         self.stepnumber = 0
         self.smoke = []
 
@@ -444,15 +445,18 @@ class RocketLander(gym.Env):
 
         reward = -fuelcost
 
-        if outside or brokenleg:
+        self.stepnumber += 1
+
+        if outside or brokenleg or self.stepnumber >1000:
             self.game_over = True
 
         if self.game_over:
             done = True
+            reward  = -100.0
         else:
             # reward shaping
-            shaping = -0.5 * (distance + speed + abs(angle) ** 2 + abs(vel_a) ** 2)
-            shaping += 0.1 * (self.legs[0].ground_contact + self.legs[1].ground_contact)
+            shaping = -(distance + speed + abs(angle) ** 2 + abs(vel_a) ** 2)
+            shaping += 0.75 * (self.legs[0].ground_contact + self.legs[1].ground_contact)
             if self.prev_shaping is not None:
                 reward += shaping - self.prev_shaping
             self.prev_shaping = shaping
@@ -461,14 +465,14 @@ class RocketLander(gym.Env):
                 self.landed_ticks += 1
             else:
                 self.landed_ticks = 0
-            if self.landed_ticks == 2:
-                reward = 1.0
+            if self.landed_ticks >= int(FPS/2):
+                reward = 1000.0
                 done = True
 
         if done:
             reward += max(-1, 0 - 2 * (speed + distance + abs(angle) + abs(vel_a)))
 
-        reward = np.clip(reward, -1, 1)
+        # reward = np.clip(reward, -1, 1)
 
         # REWARD -------------------------------------------------------------------------------------------------------
 
